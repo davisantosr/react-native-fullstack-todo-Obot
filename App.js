@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 
 export default function App() {
 
@@ -26,10 +26,21 @@ export default function App() {
           onPress={addTodoList}
         />
       </View>
-      <View>
-        <Text>Todo List</Text>
-      </View>
-      </View>
+      <ScrollView>
+        {todoList.map(todo => {
+          return (
+            <View
+              key={todo}
+              style={styles.todoItem}
+            >
+              <Text>
+                {todo}
+              </Text>
+            </View>
+          )
+        })}
+      </ScrollView>
+    </View>
       
   );
 }
@@ -44,6 +55,13 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     marginBottom: 10,
     borderWidth:1
-
+  },
+  todoItem: {
+    marginTop:10,
+    padding:20,
+    backgroundColor: '#f2f2f2',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'gray'
   }
 });
