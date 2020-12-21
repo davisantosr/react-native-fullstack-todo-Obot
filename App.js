@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 
+import Header from './src/components/Header'
+
 export default function App() {
 
   const [ todoItem, setTodoItem ] = useState('')
@@ -13,34 +15,38 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
-      <View>
-        <TextInput
-          placeholder='Enter item'
-          style={styles.textInput}
-          onChangeText={text => setTodoItem(text)}
-          value={todoItem}
-        />
-        <Button
-          title='add todo item'
-          onPress={addTodoList}
-        />
+    <View>
+      <Header title='Todo list'/>
+      <View style={styles.container}>
+        <View>
+          <TextInput
+            placeholder='Enter item'
+            style={styles.textInput}
+            onChangeText={text => setTodoItem(text)}
+            value={todoItem}
+          />
+          <Button
+            title='add todo item'
+            onPress={addTodoList}
+          />
+        </View>
+        <ScrollView>
+          {todoList.map(todo => {
+            return (
+              <View
+                key={todo}
+                style={styles.todoItem}
+              >
+                <Text>
+                  {todo}
+                </Text>
+              </View>
+            )
+          })}
+        </ScrollView>
       </View>
-      <ScrollView>
-        {todoList.map(todo => {
-          return (
-            <View
-              key={todo}
-              style={styles.todoItem}
-            >
-              <Text>
-                {todo}
-              </Text>
-            </View>
-          )
-        })}
-      </ScrollView>
     </View>
+
       
   );
 }
