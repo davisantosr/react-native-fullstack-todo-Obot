@@ -1,18 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+
+  const [ todoItem, setTodoItem ] = useState('')
+  const [ todoList, setTodoList ] = useState([])
+
+  const addTodoList = () => {
+    setTodoList([...todoList, todoItem])
+    console.log(todoList);
+  }
+
+
   return (
     <View style={styles.container}>
       <View>
         <TextInput
           placeholder='Enter item'
           style={styles.textInput}
+          onChangeText={text => setTodoItem(text)}
+          value={todoItem}
         />
         <Button
           title='add todo item'
-          onPress={() => console.log('Button clicked')}
+          onPress={addTodoList}
         />
       </View>
       <View>
